@@ -1,0 +1,148 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@echecs/zobrist - v1.0.2</title><meta name="description" content="Documentation for @echecs/zobrist"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="index.html" class="title">@echecs/zobrist - v1.0.2</a><div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>@echecs/zobrist - v1.0.2</h1></div><div class="tsd-panel tsd-typography"><h1 id="echecszobrist" class="tsd-anchor-link">@echecs/zobrist<a href="#echecszobrist" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1>
+<p>The 781 <a href="http://hgm.nubati.net/book_format.html">Polyglot</a> standard Zobrist hash
+keys for chess positions. Zero dependencies, strict TypeScript.</p>
+<h2 id="install" class="tsd-anchor-link">Install<a href="#install" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">@echecs/zobrist</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="quick-start" class="tsd-anchor-link">Quick Start<a href="#quick-start" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">castling</span><span class="hl-1">, </span><span class="hl-4">enPassant</span><span class="hl-1">, </span><span class="hl-4">piece</span><span class="hl-1">, </span><span class="hl-4">turn</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@echecs/zobrist&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">// Compute the Polyglot hash for the starting position</span><br/><span class="hl-6">let</span><span class="hl-1"> </span><span class="hl-4">hash</span><span class="hl-1"> = </span><span class="hl-7">0</span><span class="hl-6">n</span><span class="hl-1">;</span><br/><br/><span class="hl-5">// XOR piece-square keys for all 32 pieces</span><br/><span class="hl-4">hash</span><span class="hl-1"> ^= </span><span class="hl-0">piece</span><span class="hl-1">(</span><span class="hl-2">&#39;e1&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;king&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;white&#39;</span><span class="hl-1">);</span><br/><span class="hl-4">hash</span><span class="hl-1"> ^= </span><span class="hl-0">piece</span><span class="hl-1">(</span><span class="hl-2">&#39;d1&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;queen&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;white&#39;</span><span class="hl-1">);</span><br/><span class="hl-5">// ... all other pieces ...</span><br/><br/><span class="hl-5">// XOR the turn key (only when white to move)</span><br/><span class="hl-4">hash</span><span class="hl-1"> ^= </span><span class="hl-0">turn</span><span class="hl-1">(</span><span class="hl-2">&#39;white&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-5">// XOR castling rights</span><br/><span class="hl-4">hash</span><span class="hl-1"> ^= </span><span class="hl-0">castling</span><span class="hl-1">(</span><span class="hl-2">&#39;white&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;king&#39;</span><span class="hl-1">);</span><br/><span class="hl-4">hash</span><span class="hl-1"> ^= </span><span class="hl-0">castling</span><span class="hl-1">(</span><span class="hl-2">&#39;white&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;queen&#39;</span><span class="hl-1">);</span><br/><span class="hl-4">hash</span><span class="hl-1"> ^= </span><span class="hl-0">castling</span><span class="hl-1">(</span><span class="hl-2">&#39;black&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;king&#39;</span><span class="hl-1">);</span><br/><span class="hl-4">hash</span><span class="hl-1"> ^= </span><span class="hl-0">castling</span><span class="hl-1">(</span><span class="hl-2">&#39;black&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;queen&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-5">// XOR en passant file (only if an enemy pawn can capture)</span><br/><span class="hl-5">// hash ^= enPassant(&#39;e&#39;);</span><br/><br/><span class="hl-4">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-4">hash</span><span class="hl-1">.</span><span class="hl-0">toString</span><span class="hl-1">(</span><span class="hl-7">16</span><span class="hl-1">)); </span><span class="hl-5">// &#39;463b96181691fc9c&#39;</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="api" class="tsd-anchor-link">API<a href="#api" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h3 id="_" class="tsd-anchor-link"><code>piece(square, type, color)</code><a href="#_" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Returns the Zobrist key for a piece on a square.</p>
+<ul>
+<li><code>square</code> — Board square (<code>'a1'</code> through <code>'h8'</code>)</li>
+<li><code>type</code> — Piece type (<code>'pawn'</code> | <code>'knight'</code> | <code>'bishop'</code> | <code>'rook'</code> | <code>'queen'</code>
+| <code>'king'</code>)</li>
+<li><code>color</code> — Side (<code>'white'</code> | <code>'black'</code>)</li>
+</ul>
+<h3 id="_-1" class="tsd-anchor-link"><code>turn(color)</code><a href="#_-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Returns the side-to-move key. Per the Polyglot spec, the key is included only
+when white is to move. Returns <code>0n</code> for black.</p>
+<h3 id="_-2" class="tsd-anchor-link"><code>castling(color, side)</code><a href="#_-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Returns the castling right key.</p>
+<ul>
+<li><code>color</code> — <code>'white'</code> | <code>'black'</code></li>
+<li><code>side</code> — <code>'king'</code> | <code>'queen'</code></li>
+</ul>
+<h3 id="_-3" class="tsd-anchor-link"><code>enPassant(file)</code><a href="#_-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Returns the en passant file key.</p>
+<ul>
+<li><code>file</code> — <code>'a'</code> through <code>'h'</code></li>
+</ul>
+<p>Per the Polyglot spec, include this only if a pawn of the side to move is
+adjacent to the en passant target square.</p>
+<h3 id="_-4" class="tsd-anchor-link"><code>KEYS</code><a href="#_-4" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>The raw 781-value <code>readonly bigint[]</code> array for direct Polyglot index access.
+Layout: <code>[0..767]</code> piece-square, <code>[768..771]</code> castling, <code>[772..779]</code> en passant,
+<code>[780]</code> turn.</p>
+<h2 id="types" class="tsd-anchor-link">Types<a href="#types" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<pre><code class="typescript"><span class="hl-6">type</span><span class="hl-1"> </span><span class="hl-8">CastlingSide</span><span class="hl-1"> = </span><span class="hl-2">&#39;king&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;queen&#39;</span><span class="hl-1">;</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Castling side — kingside or queenside.</p>
+<pre><code class="typescript"><span class="hl-6">type</span><span class="hl-1"> </span><span class="hl-8">Color</span><span class="hl-1"> = </span><span class="hl-2">&#39;black&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;white&#39;</span><span class="hl-1">;</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Side to move.</p>
+<pre><code class="typescript"><span class="hl-6">type</span><span class="hl-1"> </span><span class="hl-8">File</span><span class="hl-1"> = </span><span class="hl-2">&#39;a&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;b&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;c&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;d&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;e&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;f&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;g&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;h&#39;</span><span class="hl-1">;</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Board file (column).</p>
+<pre><code class="typescript"><span class="hl-6">type</span><span class="hl-1"> </span><span class="hl-8">PieceType</span><span class="hl-1"> = </span><span class="hl-2">&#39;bishop&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;king&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;knight&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;pawn&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;queen&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;rook&#39;</span><span class="hl-1">;</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Chess piece type.</p>
+<pre><code class="typescript"><span class="hl-6">type</span><span class="hl-1"> </span><span class="hl-8">Rank</span><span class="hl-1"> = </span><span class="hl-2">&#39;1&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;2&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;3&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;4&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;5&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;6&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;7&#39;</span><span class="hl-1"> | </span><span class="hl-2">&#39;8&#39;</span><span class="hl-1">;</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Board rank (row).</p>
+<pre><code class="typescript"><span class="hl-6">type</span><span class="hl-1"> </span><span class="hl-8">Square</span><span class="hl-1"> = </span><span class="hl-2">`</span><span class="hl-6">${</span><span class="hl-8">File</span><span class="hl-6">}${</span><span class="hl-8">Rank</span><span class="hl-6">}</span><span class="hl-2">`</span><span class="hl-1">;</span>
+</code><button type="button">Copy</button></pre>
+
+<p>A board square — combination of <code>File</code> and <code>Rank</code>, e.g. <code>'e4'</code>.</p>
+<h2 id="polyglot-layout" class="tsd-anchor-link">Polyglot Layout<a href="#polyglot-layout" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<table>
+<thead>
+<tr>
+<th>Subarray</th>
+<th>Offset</th>
+<th>Length</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Piece-square</td>
+<td>0</td>
+<td>768</td>
+<td>12 piece kinds x 64 squares</td>
+</tr>
+<tr>
+<td>Castling</td>
+<td>768</td>
+<td>4</td>
+<td>White K/Q, Black K/Q</td>
+</tr>
+<tr>
+<td>En passant</td>
+<td>772</td>
+<td>8</td>
+<td>Files a through h</td>
+</tr>
+<tr>
+<td>Turn</td>
+<td>780</td>
+<td>1</td>
+<td>XOR when white to move</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Piece kind index:</strong> <code>(pieceType - 1) * 2 + colorPivot</code></p>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Black</th>
+<th>White</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pawn</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Knight</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Bishop</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Rook</td>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Queen</td>
+<td>8</td>
+<td>9</td>
+</tr>
+<tr>
+<td>King</td>
+<td>10</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Square index:</strong> <code>rank * 8 + file</code> (a1=0, b1=1, ..., h8=63)</p>
+<h2 id="license" class="tsd-anchor-link">License<a href="#license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>MIT</p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#echecszobrist"><span>@echecs/zobrist</span></a><ul><li><a href="#install"><span>Install</span></a></li><li><a href="#quick-start"><span>Quick <wbr/>Start</span></a></li><li><a href="#api"><span>API</span></a></li><li><ul><li><a href="#_"><span></span></a></li><li><a href="#_-1"><span></span></a></li><li><a href="#_-2"><span></span></a></li><li><a href="#_-3"><span></span></a></li><li><a href="#_-4"><span></span></a></li></ul></li><li><a href="#types"><span>Types</span></a></li><li><a href="#polyglot-layout"><span>Polyglot <wbr/>Layout</span></a></li><li><a href="#license"><span>License</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">@echecs/zobrist - v1.0.2</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>
