@@ -6,3 +6,11 @@
 
 # Tests
 coverage/
+
+# Documentation
+docs/api/*
+!docs/api/.gitkeep
+
+# Agent planning artifacts
+.superpowers/
+docs/superpowers/
