@@ -1,5 +1,7 @@
 # @echecs/zobrist
 
+[![Spec](https://img.shields.io/badge/Spec-Polyglot-green.svg)](SPEC.md)
+
 The 781 [Polyglot](http://hgm.nubati.net/book_format.html) standard Zobrist hash
 keys for chess positions. Zero dependencies, strict TypeScript.
 
