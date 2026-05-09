@@ -38,7 +38,7 @@
     "README.md",
     "CHANGELOG.md"
   ],
-  "homepage": "https://github.com/echecsjs/zobrist#readme",
+  "homepage": "https://zobrist.echecs.dev",
   "keywords": [
     "chess",
     "hash",
