@@ -3,7 +3,7 @@
 Agent guidance for the `@echecs/zobrist` package — Polyglot standard Zobrist
 hash keys for chess positions.
 
-**See also:** [`REFERENCES.md`](REFERENCES.md)
+**See also:** [`REFERENCES.md`](REFERENCES.md), [`SPEC.md`](SPEC.md)
 
 See the root `AGENTS.md` for workspace-wide conventions.
 
