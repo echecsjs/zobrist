@@ -99,11 +99,13 @@ describe('@echecs/zobrist', () => {
       h ^= piece('g8', 'knight', 'black');
       h ^= piece('h8', 'rook', 'black');
 
-      for (const file of 'abcdefgh') {
+      const blackPawnFiles = 'abcdefgh';
+      for (const file of blackPawnFiles) {
         h ^= piece(`${file}7` as Square, 'pawn', 'black');
       }
 
-      for (const file of 'abcdefgh') {
+      const whitePawnFiles = 'abcdefgh';
+      for (const file of whitePawnFiles) {
         h ^= piece(`${file}2` as Square, 'pawn', 'white');
       }
 
@@ -138,11 +140,13 @@ describe('@echecs/zobrist', () => {
       h ^= piece('g8', 'knight', 'black');
       h ^= piece('h8', 'rook', 'black');
 
-      for (const file of 'abcdefgh') {
+      const blackPawnFiles = 'abcdefgh';
+      for (const file of blackPawnFiles) {
         h ^= piece(`${file}7` as Square, 'pawn', 'black');
       }
 
-      for (const file of 'abcdfgh') {
+      const whitePawnFiles = 'abcdfgh';
+      for (const file of whitePawnFiles) {
         h ^= piece(`${file}2` as Square, 'pawn', 'white');
       }
       h ^= piece('e4', 'pawn', 'white');
@@ -178,12 +182,14 @@ describe('@echecs/zobrist', () => {
       h ^= piece('g8', 'knight', 'black');
       h ^= piece('h8', 'rook', 'black');
 
-      for (const file of 'abcefgh') {
+      const blackPawnFiles = 'abcefgh';
+      for (const file of blackPawnFiles) {
         h ^= piece(`${file}7` as Square, 'pawn', 'black');
       }
       h ^= piece('d5', 'pawn', 'black');
 
-      for (const file of 'abcdfgh') {
+      const whitePawnFiles = 'abcdfgh';
+      for (const file of whitePawnFiles) {
         h ^= piece(`${file}2` as Square, 'pawn', 'white');
       }
       h ^= piece('e4', 'pawn', 'white');
