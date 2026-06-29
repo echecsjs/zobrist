@@ -1,6 +1,6 @@
 // Polyglot standard Zobrist hash keys.
 //
-// Source: http://hgm.nubati.net/book_format.html
+// Source: https://hgm.nubati.net/book_format.html
 // Reference: https://github.com/niklasf/python-chess/blob/master/chess/polyglot.py
 //
 // Layout:
