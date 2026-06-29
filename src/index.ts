@@ -44,7 +44,7 @@ function enPassant(file: File): bigint {
 
 function piece(square: Square, type: PieceType, color: Color): bigint {
   const file = (square.codePointAt(0) ?? 0) - 97;
-  const rank = Number(square[1]) - 1;
+  const rank = Number(square.at(1)) - 1;
   const squareIndex = rank * 8 + file;
   const kindIndex = (PIECE_TYPE[type] - 1) * 2 + COLOR_PIVOT[color];
 
